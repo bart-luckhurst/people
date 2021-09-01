@@ -43,6 +43,8 @@ namespace People.Api
             app.SetupDatabase();
             app.ConfigureSwagger();
 
+            app.UseOpenCors();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
