@@ -1,0 +1,34 @@
+<div class="form-container">
+    <h2>Update Person</h2>
+    <form (ngSubmit)="onSubmit()" #createForm="ngForm">
+        <div class="form-item">
+            <label for="forenameInput">Forename</label>
+            <input type="text" 
+                id="forenameInput" 
+                name="forenameInput" 
+                class="form-input" 
+                [(ngModel)]="selectedPerson.forename"
+                required
+                #forenameInput="ngModel" />
+            <div class="validation-error" [hidden]="forenameInput.valid || forenameInput.pristine">Forename is required.</div>
+        </div>
+        <div class="form-item">
+            <label for="forenameInput">Surname</label>
+            <input type="text" 
+                id="surnameInput" 
+                name="surnameInput" 
+                class="form-input" 
+                [(ngModel)]="selectedPerson.surname" 
+                required
+                #surnameInput="ngModel" />
+            <div class="validation-error" [hidden]="surnameInput.valid || surnameInput.pristine">Surname is required.</div>
+        </div>
+        <div class="form-buttons-container">
+            <div></div>
+            <button class="secondary-button" (click)="cancel()">Cancel</button>
+            <button class="primary-button"
+                type="submit"
+                [disabled]="!createForm.form.valid">Save changes</button>
+        </div>
+    </form>
+</div>

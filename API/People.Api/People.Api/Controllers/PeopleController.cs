@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using People.Api.Entities;
 using People.Api.Models;
 using People.Api.Services;
@@ -17,12 +18,15 @@ namespace People.Api.Controllers
     {
         private readonly IPersonService personService;
         private readonly IMapper mapper;
+        private readonly ILogger logger;
 
         public PeopleController(IPersonService personService,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<PeopleController> logger)
         {
             this.personService = personService;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -33,9 +37,14 @@ namespace People.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<OutputPerson>> CreateAsync([FromBody] CreatePerson createPerson)
         {
+            logger.LogInformation($"Start request: /people POST forename: {createPerson.Forename} surname: {createPerson.Surname}");
+            
             Person createdPerson = await personService.CreateAsync(createPerson.Forename,
                 createPerson.Surname);
             OutputPerson outputPerson = mapper.Map<OutputPerson>(createdPerson);
+            
+            logger.LogInformation($"End request: /people POST personId: {outputPerson.PersonId} forename: {outputPerson.Forename} surname: {outputPerson.Surname}");
+            
             return CreatedAtAction(nameof(GetSingleAsync),
                 new { outputPerson.PersonId },
                 outputPerson);
@@ -48,8 +57,13 @@ namespace People.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<OutputPerson>>> GetAllAsync()
         {
+            logger.LogInformation($"Start request: /people GET");
+
             IEnumerable<Person> allPeople = await personService.GetAllAsync();
             List<OutputPerson> outputPeople = mapper.Map<IEnumerable<Person>, List<OutputPerson>>(allPeople);
+
+            logger.LogInformation($"End request: /people GET");
+
             return Ok(outputPeople);
         }
 
@@ -62,9 +76,14 @@ namespace People.Api.Controllers
         [ActionName(nameof(GetSingleAsync))]
         public async Task<ActionResult<OutputPerson>> GetSingleAsync(Guid personId)
         {
+            logger.LogInformation($"Start request: /people/{personId} GET");
+
             Person specifiedPerson = await personService.GetSingleAsync(personId);
             OutputPerson outputPerson = mapper.Map<Person, OutputPerson>(specifiedPerson);
-            return outputPerson;
+
+            logger.LogInformation($"End request: /people/{personId} GET");
+
+            return Ok(outputPerson);
         }
 
         /// <summary>
@@ -77,11 +96,17 @@ namespace People.Api.Controllers
         public async Task<ActionResult<OutputPerson>> UpdateAsync(Guid personId,
             UpdatePerson updatePerson)
         {
+
+            logger.LogInformation($"Start request: /people/{personId} PUT forename: {updatePerson.Forename} surname: {updatePerson.Surname}");
+
             Person updatedPerson = await personService.UpdateAsync(personId,
                 updatePerson.Forename,
                 updatePerson.Surname);
             OutputPerson outputPerson = mapper.Map<Person, OutputPerson>(updatedPerson);
-            return outputPerson;
+
+            logger.LogInformation($"End request: /people/{personId} PUT forename: {updatePerson.Forename} surname: {updatePerson.Surname}");
+
+            return Ok(outputPerson);
         }
 
         /// <summary>
@@ -92,7 +117,12 @@ namespace People.Api.Controllers
         [HttpDelete("{personId}")]
         public async Task<ActionResult> DeleteAsync(Guid personId)
         {
+            logger.LogInformation($"Start request: /people/{personId} DELETE");
+
             await personService.DeleteAsync(personId);
+
+            logger.LogInformation($"End request: /people/{personId} DELETE");
+
             return NoContent();
         }
     }

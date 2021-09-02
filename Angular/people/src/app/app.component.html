@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div class="page-container">
+    <app-list *ngIf="state == PeopleListState.Ready"></app-list>
+    <app-create *ngIf="state == PeopleListState.Create"></app-create>
+    <app-edit *ngIf="state == PeopleListState.Edit"></app-edit>
+    <app-loading-spinner *ngIf="state == PeopleListState.Loading"></app-loading-spinner>
+</div>

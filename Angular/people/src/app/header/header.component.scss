@@ -1,0 +1,56 @@
+@use "../../styles/palette.scss";
+@use "../../styles/typography.scss";
+
+.page-header {
+    width: 100%;
+    height: 59px;
+    line-height: 60px;
+    border-bottom: 1px solid palette.$border-color;
+    background-color: palette.$faded-background-color;
+    display: flex;
+}
+
+.people-logo-container {
+    display: flex;
+    flex-grow: 0;
+}
+
+.people-icon-container {
+    width: 36px;
+    height: 36px;
+    margin: 12px;
+    line-height: 36px;
+    text-align: center;
+    flex-grow: 0;
+}
+
+.people-text-container {
+    height: 60px;
+    line-height: 60px;
+    flex-grow: 1;
+
+    h1 {
+        margin: 0px;
+        padding: 0px;
+        font-size: 28px;
+        font-family: typography.$header-font-family;
+        font-weight: 400;
+    }
+}
+
+.header-spacer {
+    flex-grow: 1;
+}
+
+.add-button-container {
+    width: 60px;
+    height: 60px;
+    flex-grow: 0;
+}
+
+.add-button {
+    width: 60px;
+    height: 60px;
+    margin: 0px;
+    border: 0px none transparent;
+}

@@ -1,0 +1,18 @@
+<header class="page-header">
+    <div class="people-logo-container gradient-text">
+        <div class="people-icon-container">
+            <span class="material-icons md36">people</span>
+        </div>
+        <div class="people-text-container">
+            <h1>People</h1>
+        </div>
+    </div>
+    
+    <div class="header-spacer"></div>
+
+    <div class="add-button-container" *ngIf="state != PeopleListState.Create && state != PeopleListState.Edit">
+        <button class="secondary-button" (click)="showCreate()">
+            <span class="material-icons">add</span>
+        </button>
+    </div>
+</header>

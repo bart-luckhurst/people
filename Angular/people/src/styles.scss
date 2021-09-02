@@ -1,0 +1,123 @@
+@use 'styles/palette.scss';
+@use 'styles/typography.scss';
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: typography.$body-font-family;
+}
+
+.gradient-text {
+    background: palette.$accent-color;
+    background: palette.$accent-gradient;
+    -moz-text-fill-color: transparent!important;
+    -o-text-fill-color: transparent!important;
+    -webkit-text-fill-color: transparent!important;
+    text-fill-color: transparent!important;
+    -moz-background-clip: text!important;
+    -o-background-clip: text!important;
+    -webkit-background-clip: text!important;
+    background-clip: text!important;
+}
+
+.primary-button, .danger-button, .secondary-button {
+    height: 48px;
+    min-width: 48px;
+    margin: 6px;
+    padding: 10px;
+    border-width: 2px;
+    border-style: solid;
+    background-color: transparent;
+    text-align: center;
+    border-radius: 6px;
+    font-family: typography.$body-font-family;
+    font-weight: 400;
+    font-size: 16px;
+
+    span {
+        display: block;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.primary-button:active , .danger-button:active, .secondary-button:active {
+    transform: scale(0.92);
+}
+
+.primary-button:disabled , .danger-button:disabled, .secondary-button:disabled {
+    color: palette.$border-color;
+    border-color: palette.$border-color;
+}
+
+.primary-button {
+    color: palette.$secondary-accent-color;
+    border-color: palette.$secondary-accent-color;
+}
+
+.danger-button {
+    color: palette.$accent-color;
+    border-color: palette.$accent-color;
+}
+
+.secondary-button {
+    color: palette.$foreground-color;
+    border-color: palette.$border-color;
+}
+
+.form-container {
+    width: calc(100% - 48px);
+    margin: 12px;
+    padding: 11px;
+    background-color: palette.$faded-background-color;
+    border: 1px solid palette.$border-color;
+}
+
+.form-item {
+    margin: 12px 0px;
+
+    label {
+        display: block;
+        height: 28px;
+        line-height: 28px;
+        font-family: typography.$body-font-family;
+        font-size: 18px;
+    }
+
+    input {
+        width: calc(100% - 8px);
+        max-width: 640px;
+        height: 36px;
+        padding: 2px;
+        border: 2px solid palette.$border-color;
+        margin: 0px;
+        border-radius: 6px;
+    }
+}
+
+.form-buttons-container {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    text-align: right;
+
+    div {
+        flex-grow: 1;
+    }
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form)  {
+    border-left: 5px solid palette.$accent-color;
+}
+
+.validation-error {
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+}

@@ -32,17 +32,5 @@ namespace People.Api.Utilities
             serviceCollection.AddDbContext<PersonContext>(options =>
                options.UseSqlServer(connectionString));
         }
-
-        public static void ConfigureCors(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddCors(options =>
-            {
-                //In real world deployments, this would be locked down to specific domains.
-                options.AddPolicy("CorsPolicy",
-                builder => builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-            });
-        }
     }
 }
