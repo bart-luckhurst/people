@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using People.Api.Entities.Exceptions;
 using People.Api.Models;
 using System;
@@ -12,10 +13,13 @@ namespace People.Api.ExceptionMiddleware
     public class GlobalExceptionHandler
     {
         private readonly RequestDelegate next;
+        private readonly ILogger logger;
 
-        public GlobalExceptionHandler(RequestDelegate next)
+        public GlobalExceptionHandler(RequestDelegate next,
+            ILogger<GlobalExceptionHandler> logger)
         {
             this.next = next;
+            this.logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -26,6 +30,10 @@ namespace People.Api.ExceptionMiddleware
             }
             catch (Exception ex)
             {
+                logger.LogError($"Exception occured in {httpContext.Request.Path} {httpContext.Request.Method}");
+                logger.LogError(ex.Message);
+                logger.LogError(ex.StackTrace);
+
                 Type exceptionType = ex.GetType();
                 if (exceptionType == typeof(ValidationException))
                 {
