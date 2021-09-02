@@ -42,13 +42,14 @@ namespace People.Api
         {
             app.SetupDatabase();
             app.ConfigureSwagger();
+            app.ConfigureGlobalExceptionHandler();
 
             app.UseOpenCors();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseHttpsRedirection();
 
