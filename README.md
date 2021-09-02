@@ -1,15 +1,20 @@
 # people
 A simple .NET Core API and Angular app to manage a list of people.
 
+
 #### Features ####
 - View all people
 - Add a person
 - Update a person
 - Delete a person
 
+
 #### View online ####
+
 Angular App: https://people-angular.azurewebsites.net/
+
 API: https://people-api.azurewebsites.net/swagger
+
 
 #### API Overview ####
 - Visual Studio
@@ -23,17 +28,21 @@ API: https://people-api.azurewebsites.net/swagger
 - Swashbuckle/Swagger
 - Basic debug logging for simplicity - I would usually use NLog in the real world.
 
+
 #### Steps to run the API ####
 - Open in VS
 - Change the connection string in appsettings.json
 - EF Core will create the database for you on first run
 - You should be good to go!
 
+
 #### Front End Overview ####
+- VS Code
 - Angular 11
 - scss for stylesheets
 - Services with Observables and Subjects
 - (Reckonise the colours??)
+
 
 #### Steps to run the Angular App ####
 - Open the folder "/Angular/people" in VS Code
